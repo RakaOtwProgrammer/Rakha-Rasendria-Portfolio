@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -8,6 +7,15 @@
 
     <title>Rakha Rasendria | Portfolio</title>
 
+    <meta name="description" content="Portofolio Rakha Rasendria: Editor, Poster Designer, dan UI/UX Designer yang sedang belajar pengembangan website.">
+    <meta name="theme-color" content="#080808">
+
+    <!-- Preview saat link dibagikan -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rakha Rasendria | Portfolio">
+    <meta property="og:description" content="Editor, Poster Designer, dan UI/UX Designer yang sedang belajar pengembangan website.">
+
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -26,6 +34,7 @@
         <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#projects" class="nav-link">Projects</a>
+        <a href="#music" class="nav-link">Music</a>
         <a href="#contact" class="nav-link">Contact</a>
     </nav>
 
@@ -153,12 +162,12 @@
 
                 <div class="detail-item">
                     <span>PROFESSION</span>
-                    <h3>Editor and Poster Designer</h3>
+                    <h3>Editor, Poster Designer &amp; UI/UX Designer</h3>
                 </div>
 
                 <div class="detail-item">
                     <span>LOCATION / SCHOOL</span>
-                    <h3>Indonesia, North Sumatra, SMKN2 tebing-tinggi</h3>
+                    <h3>Indonesia, North Sumatra, SMKN 2 Tebing Tinggi</h3>
                 </div>
 
                 <div class="detail-item">
@@ -277,11 +286,11 @@
                 <h3>My First Project</h3>
 
                 <p>
-                    Codingan yang saya dapatkan saat mempelajari HTML, CSS, javascript
-                    dan python
+                    Kumpulan kode hasil belajar saya
+                    dalam HTML, CSS, JavaScript, dan Python.
                 </p>
 
-                <span>HTML / CSS / JAVASCRIPT AND PYTHON</span>
+                <span>HTML / CSS / JAVASCRIPT / PYTHON</span>
 
                 <a href="https://github.com/RakaOtwProgrammer/Raka"
                    target="_blank"
@@ -337,8 +346,8 @@
                 <h3>Edited Video</h3>
 
                 <p>
-                    Vidio sederhana yang saya edit menggunakan Alight
-                    motion dan CapCut untuk keperluan konten media sosial.
+                    Video sederhana yang saya edit menggunakan Alight
+                    Motion dan CapCut untuk keperluan konten media sosial.
                 </p>
 
                 <span>EDITED</span>
@@ -357,12 +366,88 @@
 
 </section>
 
+    <!-- MUSIC -->
+    <section class="section" id="music">
+
+        <div class="section-heading">
+            <p>04 / MY MUSIC</p>
+            <h2>MY <span>ALBUM</span></h2>
+        </div>
+
+        <div class="music-player">
+
+            <!-- COVER ALBUM -->
+            <div class="album-card">
+
+                <div class="album-cover" id="albumCover">
+                    <img src="images/album.png" alt="Cover album Rakha Rasendria">
+                </div>
+
+                <h3>My First Album</h3>
+
+                <p class="album-artist">Rakha Rasendria</p>
+
+            </div>
+
+            <!-- PLAYER -->
+            <div class="player-panel">
+
+                <div class="now-playing">
+                    <span>NOW PLAYING</span>
+                    <h3 id="trackTitle">-</h3>
+                </div>
+
+                <div class="progress">
+                    <span id="currentTime">0:00</span>
+                    <input type="range" class="seek" id="seek"
+                           min="0" max="100" step="0.1" value="0"
+                           aria-label="Posisi lagu">
+                    <span id="duration">0:00</span>
+                </div>
+
+                <div class="controls">
+
+                    <button class="ctrl" id="prevBtn" aria-label="Lagu sebelumnya">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                            <path d="M6 6h2v12H6zM9.5 12L18 6v12z"/>
+                        </svg>
+                    </button>
+
+                    <button class="ctrl ctrl-play" id="playBtn" aria-label="Putar">
+                        <svg class="icon-play" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="icon-pause" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+                            <path d="M6 5h4v14H6zM14 5h4v14h-4z"/>
+                        </svg>
+                    </button>
+
+                    <button class="ctrl" id="nextBtn" aria-label="Lagu berikutnya">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                            <path d="M16 6h2v12h-2zM6 18V6l8.5 6z"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+                <p class="player-note" id="playerNote" hidden></p>
+
+                <ul class="tracklist" id="trackList"></ul>
+
+            </div>
+
+        </div>
+
+        <audio id="audio" preload="metadata"></audio>
+
+    </section>
+
     <!-- CONTACT -->
     <section class="section" id="contact">
 
         <div class="section-heading">
 
-            <p>04 / GET IN TOUCH</p>
+            <p>05 / GET IN TOUCH</p>
 
             <h2>CONTACT <span>ME</span></h2>
 

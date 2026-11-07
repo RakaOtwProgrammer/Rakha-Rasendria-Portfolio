@@ -258,7 +258,9 @@ a {
 .about-details,
 .skill-card,
 .project-card,
-.contact-box {
+.contact-box,
+.album-card,
+.player-panel {
     background: rgba(25, 12, 12, 0.85);
     border: 1px solid rgba(255, 48, 48, 0.18);
     backdrop-filter: blur(10px);
@@ -455,6 +457,262 @@ a {
 }
 
 /* =================================
+   MUSIC PLAYER
+================================= */
+.music-player {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.album-card {
+    text-align: center;
+}
+
+.album-cover {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 48, 48, 0.35);
+    margin-bottom: 20px;
+}
+
+.album-cover img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.album-cover.playing {
+    animation: albumGlow 2s ease-in-out infinite;
+}
+
+@keyframes albumGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(255, 48, 48, 0.25); }
+    50%      { box-shadow: 0 0 34px rgba(255, 48, 48, 0.6); }
+}
+
+.album-card h3 {
+    font-size: 20px;
+}
+
+.album-artist {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 6px;
+    letter-spacing: 2px;
+}
+
+.now-playing span {
+    color: var(--red);
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.now-playing h3 {
+    font-size: 26px;
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.seek {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 5px;
+    border-radius: 10px;
+    background: linear-gradient(to right,
+        var(--red) var(--p, 0%),
+        var(--track, #333333) var(--p, 0%));
+    cursor: pointer;
+    outline: none;
+}
+
+.seek::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 10px rgba(255, 48, 48, 0.7);
+}
+
+.seek::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 10px rgba(255, 48, 48, 0.7);
+}
+
+.seek:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 6px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 26px;
+}
+
+.ctrl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background: #1b1b1b;
+    color: var(--red);
+    border: 1px solid var(--red);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ctrl:hover {
+    background: var(--red);
+    color: #ffffff;
+}
+
+.ctrl:focus-visible,
+.track-btn:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+}
+
+.ctrl-play {
+    width: 62px;
+    height: 62px;
+    background: var(--red);
+    color: #ffffff;
+    box-shadow: 0 0 22px rgba(255, 48, 48, 0.4);
+}
+
+.ctrl-play:hover {
+    transform: scale(1.06);
+}
+
+.ctrl-play .icon-pause,
+.ctrl-play.is-playing .icon-play {
+    display: none;
+}
+
+.ctrl-play.is-playing .icon-pause {
+    display: block;
+}
+
+body.light .ctrl {
+    background: #ffffff;
+}
+
+body.light .ctrl-play {
+    background: var(--red);
+}
+
+.player-note {
+    margin-top: 18px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 48, 48, 0.4);
+    border-radius: 6px;
+    background: rgba(255, 48, 48, 0.08);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tracklist {
+    list-style: none;
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.tracklist li {
+    border-bottom: 1px solid var(--border);
+}
+
+.track-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 14px 8px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.track-btn:hover {
+    color: var(--text);
+    background: rgba(255, 48, 48, 0.06);
+}
+
+.tracklist li.active .track-btn {
+    color: var(--red);
+}
+
+.track-num {
+    width: 24px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.track-name {
+    flex: 1;
+}
+
+/* equalizer kecil di lagu yang sedang diputar */
+.eq {
+    display: none;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+}
+
+.eq i {
+    width: 3px;
+    height: 100%;
+    background: var(--red);
+    border-radius: 2px;
+    transform-origin: bottom;
+}
+
+.tracklist li.playing .eq {
+    display: flex;
+}
+
+.tracklist li.playing .eq i {
+    animation: eqBar 0.9s ease-in-out infinite;
+}
+
+.tracklist li.playing .eq i:nth-child(2) { animation-delay: 0.2s; }
+.tracklist li.playing .eq i:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes eqBar {
+    0%, 100% { transform: scaleY(0.25); }
+    50%      { transform: scaleY(1); }
+}
+
+/* =================================
    ANIMASI SCROLL (butuh JS untuk menambah class .show)
 ================================= */
 .reveal {
@@ -505,12 +763,18 @@ body.light .about-box,
 body.light .about-details,
 body.light .skill-card,
 body.light .project-card,
-body.light .contact-box {
+body.light .contact-box,
+body.light .album-card,
+body.light .player-panel {
     background: rgba(255, 255, 255, 0.85);
 }
 
 body.light .skill-bar {
     background: #e5e5e5;
+}
+
+body.light .seek {
+    --track: #e5e5e5;
 }
 
 /* =================================
@@ -520,6 +784,16 @@ body.light .skill-bar {
     .skills-grid,
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .music-player {
+        grid-template-columns: 1fr;
+    }
+
+    .album-card {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
     }
 }
 
@@ -593,6 +867,7 @@ body.light .skill-bar {
     .nav-menu.show .nav-link:nth-child(3) { --d: 0.22s; }
     .nav-menu.show .nav-link:nth-child(4) { --d: 0.28s; }
     .nav-menu.show .nav-link:nth-child(5) { --d: 0.34s; }
+    .nav-menu.show .nav-link:nth-child(6) { --d: 0.40s; }
 
     /* ikon tombol berputar saat menu dibuka */
     .menu-toggle.active {
@@ -645,4 +920,27 @@ body.light .skill-bar {
     .menu-toggle.active {
         animation: none;
     }
+
+    .album-cover.playing,
+    .tracklist li.playing .eq i {
+        animation: none;
+    }
+}
+
+/* SCROLL MUSIC PLAYLIST */
+#trackList {
+    max-height: 165px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    scroll-behavior: smooth;
+}
+
+#trackList::-webkit-scrollbar {
+    width: 5px;
+}
+
+#trackList::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 10px;
 }
